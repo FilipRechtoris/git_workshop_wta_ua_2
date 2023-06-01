@@ -1,10 +1,16 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 Svitlana
 =======
 Kateryna V
+>>>>>>> main
+=======
+Anastasia
 >>>>>>> main
 Olena Chornobryvets
 Filip Rechtoris
 Valeria 
 Filip Rechtoris
 Lily
+
+Kateryna V
