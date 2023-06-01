@@ -10,3 +10,4 @@
 ***
 # SQL
 # Lily HomeWork
+# SELECT syntax in SQL (Svitlana Homework)
