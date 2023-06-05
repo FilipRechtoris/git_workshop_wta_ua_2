@@ -1,0 +1,404 @@
+{
+	"info": {
+		"_postman_id": "1e4f05db-59cb-497c-8eb1-1ee8e46196ef",
+		"name": "PETSTORE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create unique user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "d00cd2b6-c790-45d1-b765-b82c42c9d559",
+						"exec": [
+							" pm.environment.set('randomLogin', pm.variables.replaceIn('{{$randomFirstName}}'));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "b93a6f37-58c1-46c7-bd11-5fad3b21d932",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{randomLogin}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomEmail}}\",\r\n    \"password\": \"12345\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n}"
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get uniquely generated user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f14c340-ecca-4d76-a088-df4206d9ec34",
+						"exec": [
+							"pm.environment.set(\"userId\", pm.response.json().id);\r",
+							"console.log(pm.response.json().id);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2a65e5be-d933-45ea-8795-7b72beaf6639",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/{{randomLogin}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"{{randomLogin}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login with user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dd3cd2a4-67d4-4fbb-b0e1-b8b1734810b3",
+						"exec": [
+							"let messageString = pm.response.json().message\r",
+							"pm.environment.set(\"session\", messageString.split(':')[1])\r",
+							"console.log(messageString.split(':')[1]);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/login?username={{randomLogin}}&password=12345",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"login"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "{{randomLogin}}"
+						},
+						{
+							"key": "password",
+							"value": "12345"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update user",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "635add46-ab72-46b1-8cf3-6f35b5ba23da",
+						"exec": [
+							"pm.environment.set('changedEmail', pm.variables.replaceIn('{{$randomEmail}}'));\r",
+							"console.log(pm.environment.get(\"changedEmail\"))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "session",
+						"value": "{{session}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{  \r\n    \"id\": {{userId}},\r\n    \"username\": \"{{randomLogin}}\",\r\n    \"firstName\": \"{{$randomFirstName}}\",\r\n    \"lastName\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{changedEmail}}\",\r\n    \"password\": \"12345\",\r\n    \"phone\": \"string\",\r\n    \"userStatus\": 0\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/{{randomLogin}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"{{randomLogin}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get uniquely generated user - updated email",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "de904ed0-5552-4d71-9334-2c26d780cda6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "869960e0-5b07-4963-9373-4e1dbd81cba4",
+						"exec": [
+							"pm.test(\"Email is updated\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.email).to.eql(pm.environment.get(\"changedEmail\"));\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/{{randomLogin}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"{{randomLogin}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete user",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "session",
+						"value": "{{session}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "api_key",
+						"value": "{{session}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/{{randomLogin}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"{{randomLogin}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get uniquely generated user - should not exit",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "de904ed0-5552-4d71-9334-2c26d780cda6",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "869960e0-5b07-4963-9373-4e1dbd81cba4",
+						"exec": [
+							"pm.test(\"Your test name\", function () {\r",
+							"    var jsonData = pm.response.json();\r",
+							"    pm.expect(jsonData.code).to.eql(1);\r",
+							"    console.log(jsonData);\r",
+							"});\r",
+							"\r",
+							"var jsonData = pm.response.json();\r",
+							"console.log(jsonData);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "sesssion",
+						"value": "{{session}}",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "api_key",
+						"value": "{{session}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://petstore.swagger.io/v2/user/{{randomLogin}}",
+					"protocol": "https",
+					"host": [
+						"petstore",
+						"swagger",
+						"io"
+					],
+					"path": [
+						"v2",
+						"user",
+						"{{randomLogin}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "1a673caa-f17d-4426-a34e-bfaea969fe74",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "f2137742-0d3f-45c7-b7c6-105318573ff5",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "303c0be6-8f23-4187-a648-b650a670e3b6",
+			"key": "randomLogin",
+			"value": ""
+		},
+		{
+			"id": "538fea81-4baf-47ea-b89d-a92f4065ca36",
+			"key": "changedEmail",
+			"value": ""
+		},
+		{
+			"id": "1521911c-4846-47f0-afb1-9a1759e65c0f",
+			"key": "userId",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

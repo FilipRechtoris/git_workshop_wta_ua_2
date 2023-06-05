@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Ako som vozil Nórov</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+  <style media="screen">
+    body {
+      margin: 0 auto;
+      text-align: center;
+    }
+
+
+    div.container {
+      width: 90%;
+      margin: 0 auto;
+      padding: 50px;
+    }
+
+    div.text {
+      width: 60%;
+      float: left;
+      display: inline-block;
+      margin: 0 50px;
+    }
+
+    div.image {
+      width: 30%;
+      float: left;
+    }
+
+    img {
+      width: 300px;
+    }
+
+    p {
+      text-align: left;
+      font-size: 20px;
+      margin-top: 0;
+    }
+
+
+
+    span {
+      font-weight: 700;
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: 'Bungee Shade', cursive;
+
+    }
+
+    h1 {
+      color: #99061c;
+    }
+
+    h2 {
+      font-size: 30px;
+    }
+
+    button {
+      padding: 15px;
+      background-color: #99061c;
+      font-family: 'Montserrat', cursive;
+      font-weight: 700;
+      color: #fff;
+      font-size: 20px;
+      border: none;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #b80722;
+    }
+
+    input {
+      display: block;
+      width: 100%;
+      margin: 20px 0;
+      font-size: 25px;
+    }
+
+    #clear {
+      clear: both;
+    }
+  </style>
+
+</head>
+
+<body>
+  <h1>Ako som vozil Nórov</h1>
+  <h2>Úryvok</h2>
+
+  <div class="container">
+
+    <div class="image">
+      <img src="https://mrtns.eu/tovar/_l/623/l623389.jpg?v=1582105263" alt="">
+    </div>
+
+    <div class="text">
+      <p>Telefonát, ktorý mi radikálne zmenil zvyšok života k lepšiemu, prišiel paradoxne v deň,
+        ktorý hádam ani nemohol
+        byť horší.</p>
+      <p>Musel som ísť do práce, hoci som mal mať dva dni voľna a chystal som sa domov. Môjho zamestnávateľa, ctihodný
+        mestský dopravný podnik, v lete 2007 naplno prikvačila personálna kríza. Akútny nedostatok vodičov dospel do
+        fázy,
+        keď už nestačilo iba tlačiť ľudí do dobrovoľnej práce počas voľna. Prešlo sa na systém prikázaných nadčasov a
+        dokonca rušenia dovoleniek. A tak stojím na zastávke Nová doba a zdesene hľadím na prichádzajúcu
+        deväťdesiatosmičku, ktorej vodiča tu mám vystriedať. Namiesto očakávaného kĺbového autobusu predo mnou zastaví
+        krátka Karosa s pohonom na plyn. Výraz vodiča naznačuje, že už preplával búrlivými vodami zúrivosti a frustrácie
+        do pokojnej zátoky mámvpičizmu, toho druhu ľahostajnosti, keď vám stres a nervy vyhodia poistky.</p>
+      <p>„Prečo máš krátky?“ opýtam sa, keď sa meníme.</p>
+      <p>„Lebo dlhé už neboli,“ odpovie mi lakonicky.</p>
+      <p>Okrem vodičov chýbajú podniku aj autobusy, čo je dedičstvo rokov
+        zanedbávania obnovy vozového parku. Kvôli tomu sú teraz dve tretiny busov po papierovej životnosti, niektoré aj
+        trikrát. Nedávno som sa do garáže vrátil ťahajúc za pätnásťročnou Karosou odpadnuté prehrdzavené schodíky zo
+        zadných dverí. Som v DPB tri mesiace a, slovami Rutgera Hauera z filmu Blade Runner, videl som veci, ktoré si
+        vy,
+        ľudia, nedokážete ani predstaviť. Z misy toalety v odpočinkovej miestnosti na mňa raz vyskočila krysa, práve keď
+        som tam riešil to, čo sa obvykle rieši v podobných miestnostiach. Jej vyčítavý pohľad, keď ju prúd trafil do
+        hlavy, mám už naveky vrytý do pamäti.</p>
+      <p> Minulý týždeň som zažil do pol pása vyzlečeného bezdomovca, ktorý si vyvalený na zadnej päťsedačke spokojne z
+        tela
+        olupoval svrab. A dve babky sediace rovno za kabínou a debatujúce, ako cigánsky potkan Dzurinda neznáša Fica,
+        lebo
+        je múdry a spravodlivý a myslí na ľudí. Som touto prácou poznačený na celý život, a to mi ešte ani neskončila
+        skúšobná doba. Bohužiaľ, som príliš poctivý na to, aby som kradol, a príliš škaredý na to, aby som sa nechal
+        vydržiavať.</p>
+
+
+
+    </div>
+
+    <div id="clear"></div>
+
+  </div>
+
+  <!-- <input type="text" name="" value="" id="authorInput"> -->
+  <div class="buttons">
+    <button type="button" name="button" id="clap" onclick="clap()">zatlieskaj</button>
+
+    <a href="https://www.martinus.sk/?uItem=623389" target="_blank">
+      <button type="button" name="button">kúpiť</button>
+    </a>
+
+    <h2 id="clapCounter">0</h2>
+    <h3 id="clapDescription">tlesknutí</h3>
+    <h3 id="clapAuthor"></h3>
+
+  </div>
+
+</body>
+<script type="text/javascript">
+  var numberOfClaps = 0;
+  var clapDescription = document.getElementById("clapDescription");
+
+  function clap() {
+    numberOfClaps = numberOfClaps + 1;
+    document.getElementById("clapCounter").textContent = numberOfClaps;
+    if (numberOfClaps == 1) {
+      clapDescription.textContent = "tlesknutie";
+    }
+    if (numberOfClaps >= 2) {
+      clapDescription.textContent = "tlesknutia";
+    }
+    if (numberOfClaps >= 5) {
+      clapDescription.textContent = "tlesknutí";
+    }
+
+  }
+</script>
+
+</html>
