@@ -12,6 +12,10 @@ Olena Chornobryvets
 Filip Rechtoris
 Valeria 
 Filip Rechtoris
+<<<<<<< HEAD
+Natalia
+=======
 Lily
 
 Kateryna V
+>>>>>>> main
